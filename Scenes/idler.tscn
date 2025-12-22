@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://cc1o5cabyge58"]
+
+[ext_resource type="Script" uid="uid://0w7daxqx75iv" path="res://Scripts/statemachine.gd" id="1_beoxb"]
+[ext_resource type="Script" uid="uid://vd18rpgl81ks" path="res://Scripts/morning.gd" id="2_1osfd"]
+[ext_resource type="Script" uid="uid://c7emub3h2veov" path="res://Scripts/evening.gd" id="3_n0f5y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_beoxb"]
+size = Vector2(5, 12)
+
+[sub_resource type="Animation" id="Animation_1osfd"]
+resource_name = "idle_down"
+
+[sub_resource type="Animation" id="Animation_on78t"]
+resource_name = "idle_fish"
+
+[sub_resource type="Animation" id="Animation_n0f5y"]
+resource_name = "idle_side"
+
+[sub_resource type="Animation" id="Animation_y07fl"]
+resource_name = "idle_up"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wbm02"]
+_data = {
+&"idle_down": SubResource("Animation_1osfd"),
+&"idle_fish": SubResource("Animation_on78t"),
+&"idle_side": SubResource("Animation_n0f5y"),
+&"idle_up": SubResource("Animation_y07fl")
+}
+
+[node name="Idler" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_beoxb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+hframes = 6
+vframes = 3
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wbm02")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio"]
+max_polyphony = 4
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("1_beoxb")
+metadata/_custom_type_script = "uid://0w7daxqx75iv"
+
+[node name="MorningState" type="Node" parent="StateMachine"]
+script = ExtResource("2_1osfd")
+metadata/_custom_type_script = "uid://vd18rpgl81ks"
+
+[node name="EveningState" type="Node" parent="StateMachine"]
+script = ExtResource("3_n0f5y")
+metadata/_custom_type_script = "uid://c7emub3h2veov"

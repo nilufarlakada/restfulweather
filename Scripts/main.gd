@@ -14,5 +14,4 @@ func send_request():
 	
 func _on_request_completed(_results, _response_code, _head, _body):
 	var json = JSON.parse_string(_body.get_string_from_utf8())
-	
 	print(json)

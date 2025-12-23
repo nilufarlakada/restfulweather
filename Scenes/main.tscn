@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://by6qjyvv6ndcy"]
+[gd_scene load_steps=5 format=3 uid="uid://by6qjyvv6ndcy"]
 
 [ext_resource type="Script" uid="uid://e6hp1pc1vlye" path="res://Scripts/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bulvsf0idnnoj" path="res://ass/snowground.glb" id="2_8gbba"]
+[ext_resource type="Script" uid="uid://cbwbu6lsmt1yc" path="res://Scripts/camera_pivot.gd" id="2_jjvhh"]
+[ext_resource type="Script" uid="uid://c4b4xlktkr66k" path="res://Scripts/camer_root.gd" id="2_kry3j"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_bo1nx")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="CamerRoot" type="Node3D" parent="."]
+script = ExtResource("2_kry3j")
+
+[node name="CameraPivot" type="Node3D" parent="CamerRoot"]
+script = ExtResource("2_jjvhh")
+
+[node name="Camera3D" type="Camera3D" parent="CamerRoot/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8052, 2.90875, 14.3863)
 
 [node name="snowground" parent="." instance=ExtResource("2_8gbba")]

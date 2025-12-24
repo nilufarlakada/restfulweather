@@ -8,13 +8,13 @@
 [node name="Main" type="Node3D"]
 script = ExtResource("1_bo1nx")
 
-[node name="CamerRoot" type="Node3D" parent="."]
+[node name="CameraRoot" type="Node3D" parent="."]
 script = ExtResource("2_kry3j")
 
-[node name="CameraPivot" type="Node3D" parent="CamerRoot"]
+[node name="CameraPivot" type="Node3D" parent="CameraRoot"]
 script = ExtResource("2_jjvhh")
 
-[node name="Camera3D" type="Camera3D" parent="CamerRoot/CameraPivot"]
+[node name="Camera3D" type="Camera3D" parent="CameraRoot/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8052, 2.90875, 14.3863)
 
 [node name="snowground" parent="." instance=ExtResource("2_8gbba")]

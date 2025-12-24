@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://by6qjyvv6ndcy"]
+[gd_scene load_steps=8 format=3 uid="uid://by6qjyvv6ndcy"]
 
 [ext_resource type="Script" uid="uid://e6hp1pc1vlye" path="res://Scripts/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bulvsf0idnnoj" path="res://ass/snowground.glb" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://cbwbu6lsmt1yc" path="res://Scripts/camera_pivot.gd" id="2_jjvhh"]
 [ext_resource type="Script" uid="uid://c4b4xlktkr66k" path="res://Scripts/camer_root.gd" id="2_kry3j"]
+[ext_resource type="Script" uid="uid://0w7daxqx75iv" path="res://Scripts/scenestatemachine.gd" id="5_6bp64"]
+[ext_resource type="Script" uid="uid://ca3gc4nqn4h6e" path="res://Scenes/winter_day.gd" id="6_344ge"]
+[ext_resource type="Script" uid="uid://cmchly3lqqnyn" path="res://Scenes/winter_night.gd" id="7_ynf5e"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_bo1nx")
@@ -23,4 +26,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8052, 2.90875, 14.3863)
 transform = Transform3D(1, 0, 0, 0, 0.830878, 0.556455, 0, -0.556455, 0.830878, -10.252, 20.0656, 42.264)
 light_energy = 5.0
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[node name="WM" type="Node3D" parent="."]
+
+[node name="HTTPRequest" type="HTTPRequest" parent="WM"]
+
+[node name="SceneStateMachine" type="Node" parent="."]
+script = ExtResource("5_6bp64")
+metadata/_custom_type_script = "uid://0w7daxqx75iv"
+
+[node name="WinterDay" type="Node" parent="SceneStateMachine"]
+script = ExtResource("6_344ge")
+metadata/_custom_type_script = "uid://cea4slb007xrm"
+
+[node name="WinterNight" type="Node" parent="SceneStateMachine"]
+script = ExtResource("7_ynf5e")
+metadata/_custom_type_script = "uid://cea4slb007xrm"

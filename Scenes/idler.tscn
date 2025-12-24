@@ -1,8 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cc1o5cabyge58"]
 
-[ext_resource type="Script" uid="uid://0w7daxqx75iv" path="res://Scripts/statemachine.gd" id="1_beoxb"]
-[ext_resource type="Script" uid="uid://vd18rpgl81ks" path="res://Scripts/morning.gd" id="2_1osfd"]
-[ext_resource type="Script" uid="uid://c7emub3h2veov" path="res://Scripts/evening.gd" id="3_n0f5y"]
+[ext_resource type="Script" uid="uid://0w7daxqx75iv" path="res://Scripts/scenestatemachine.gd" id="1_beoxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_beoxb"]
 size = Vector2(5, 12)
@@ -26,6 +24,94 @@ _data = {
 &"idle_side": SubResource("Animation_n0f5y"),
 &"idle_up": SubResource("Animation_y07fl")
 }
+
+[sub_resource type="GDScript" id="GDScript_22vc3"]
+script/source = "class_name MorningState extends State
+
+var tea : bool = false
+var start_hour : int = 0
+var end_hour : int = 18
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+func Enter() -> void:
+	print(\"Entering \", self.name, \" state\")
+	'''
+	idler._update_animation(\"tea\")
+	animation_player.animation_finished.connect(EndTea)
+	tea = true
+	'''
+	pass
+
+func Exit() -> void:
+	'''
+	animation_player.animation_finished.disconnect(EndTea)
+	tea = false
+	pass
+	'''
+	pass
+
+func Process(_delta: float) -> State:
+	return null
+
+func Physics(_delta: float) -> State:
+	return null
+
+#func HandleInput(_event: InputEvent) -> State:
+	#return null
+
+func IsActiveForHour(hour: int) -> bool:
+	return hour >= start_hour and hour < end_hour
+
+func EndTea(_newAnim : String) -> void:
+	tea = false
+"
+
+[sub_resource type="GDScript" id="GDScript_prfkh"]
+script/source = "class_name EveningState extends State
+
+var brush : bool = false
+var start_hour : int = 18
+var end_hour : int = 24
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+func Enter() -> void:
+	print(\"Entering \", self.name, \" state\")
+	'''
+	idler._update_animation(\"brush\")
+	animation_player.animation_finished.connect(EndBrush)
+	brush = true
+	'''
+	pass
+
+func Exit() -> void:
+	'''
+	animation_player.animation_finished.disconnect(EndBrush)
+	brush = false
+	pass
+	'''
+	pass
+
+func Process(_delta: float) -> State:
+	return null
+
+func Physics(_delta: float) -> State:
+	return null
+
+#func HandleInput(_event: InputEvent) -> State:
+	#return null
+
+func IsActiveForHour(hour: int) -> bool:
+	return hour >= start_hour and hour < end_hour
+
+func EndBrush(_newAnim : String) -> void:
+	brush = false
+"
 
 [node name="Idler" type="CharacterBody2D"]
 
@@ -56,9 +142,9 @@ script = ExtResource("1_beoxb")
 metadata/_custom_type_script = "uid://0w7daxqx75iv"
 
 [node name="MorningState" type="Node" parent="StateMachine"]
-script = ExtResource("2_1osfd")
+script = SubResource("GDScript_22vc3")
 metadata/_custom_type_script = "uid://vd18rpgl81ks"
 
 [node name="EveningState" type="Node" parent="StateMachine"]
-script = ExtResource("3_n0f5y")
+script = SubResource("GDScript_prfkh")
 metadata/_custom_type_script = "uid://c7emub3h2veov"

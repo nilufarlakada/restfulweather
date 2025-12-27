@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://by6qjyvv6ndcy"]
+[gd_scene load_steps=9 format=3 uid="uid://by6qjyvv6ndcy"]
 
 [ext_resource type="Script" uid="uid://e6hp1pc1vlye" path="res://Scripts/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bulvsf0idnnoj" path="res://ass/snowground.glb" id="2_8gbba"]
 [ext_resource type="Script" uid="uid://cbwbu6lsmt1yc" path="res://Scripts/camera_pivot.gd" id="2_jjvhh"]
 [ext_resource type="Script" uid="uid://c4b4xlktkr66k" path="res://Scripts/camer_root.gd" id="2_kry3j"]
 [ext_resource type="Script" uid="uid://0w7daxqx75iv" path="res://Scripts/scenestatemachine.gd" id="5_6bp64"]
-[ext_resource type="Script" uid="uid://ca3gc4nqn4h6e" path="res://Scenes/winter_day.gd" id="6_344ge"]
-[ext_resource type="Script" uid="uid://cmchly3lqqnyn" path="res://Scenes/winter_night.gd" id="7_ynf5e"]
+[ext_resource type="Script" uid="uid://ca3gc4nqn4h6e" path="res://Scenes/winter.gd" id="6_344ge"]
 [ext_resource type="PackedScene" uid="uid://cgrs2eermwraq" path="res://Scenes/snowing.tscn" id="8_344ge"]
 [ext_resource type="PackedScene" uid="uid://b75gkabc5dced" path="res://Scenes/cloudy.tscn" id="8_ynf5e"]
 
@@ -47,10 +46,6 @@ script = ExtResource("5_6bp64")
 weather_conditions_path = NodePath("../WeatherConditions")
 metadata/_custom_type_script = "uid://0w7daxqx75iv"
 
-[node name="WinterDay" type="Node" parent="SceneStateMachine"]
+[node name="Winter" type="Node" parent="SceneStateMachine"]
 script = ExtResource("6_344ge")
-metadata/_custom_type_script = "uid://cea4slb007xrm"
-
-[node name="WinterNight" type="Node" parent="SceneStateMachine"]
-script = ExtResource("7_ynf5e")
 metadata/_custom_type_script = "uid://cea4slb007xrm"

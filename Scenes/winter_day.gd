@@ -18,18 +18,12 @@ func _ready() -> void:
 func Enter(weather: String, _wc: Node) -> void:
 	print("Entering WinterDay")
 	
-	var clouds = _wc.get_node("Clouds")
-	print("Clouds node visible before:", clouds.visible)
-	print(weather)
-	clouds.visible = weather == "Clouds"
-	print("Clouds node visible after:", clouds.visible)
-	
 	if light:
 		light.light_energy = 5
 
 	match weather:
 		"Clouds", "Cloudy":
-			#var clouds = _wc.get_node("Clouds")
+			var clouds = _wc.get_node("Clouds")
 			clouds.visible = weather == "Clouds"
 		"Clear":
 			pass # everything stays hidden

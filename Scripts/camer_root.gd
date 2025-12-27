@@ -7,6 +7,10 @@ class_name CameraRoot extends Node3D
 @export var min_pitch := -1.2
 @export var max_pitch := 1.2
 
+# --- Zoom limits ---
+@export var min_zoom := 2.0
+@export var max_zoom := 20.0
+
 # --- State variables ---
 var rotating := false
 var panning := false
@@ -51,9 +55,9 @@ func _unhandled_input(event):
 
 		# Scroll wheel → zoom
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera.position.z -= zoom_speed
+			camera.position.z = clamp(camera.position.z - zoom_speed, min_zoom, max_zoom)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera.position.z += zoom_speed
+			camera.position.z = clamp(camera.position.z + zoom_speed, min_zoom, max_zoom)
 
 	# --------------------------
 	# Mouse motion

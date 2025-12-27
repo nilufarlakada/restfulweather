@@ -58,7 +58,6 @@ func _check_hour_change() -> void:
 # ----- Weather Update -----
 func _on_weather_updated(weather: String) -> void:
 	current_weather = weather
-	print("Weather updated:", current_weather)
 
 	# Option 2: Let the current scene handle the new weather directly
 	if curr_scene:

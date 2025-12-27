@@ -27,19 +27,20 @@ script = ExtResource("1_v6g2j")
 environment = SubResource("Environment_jkhue")
 
 [node name="CameraRoot" type="Node3D" parent="."]
+visible = false
 script = ExtResource("2_2nknx")
 
 [node name="CameraPivot" type="Node3D" parent="CameraRoot"]
+visible = false
 script = ExtResource("3_3ru78")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRoot/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8052, 2.90875, 14.3863)
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.830878, 0.556455, 0, -0.556455, 0.830878, -10.252, 20.0656, 42.264)
 light_energy = 5.0
-
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="cloud" parent="." instance=ExtResource("5_2nknx")]
 transform = Transform3D(-6.99382e-08, 0, -1.6, 0, 1.6, 0, 1.6, 0, -6.99382e-08, -7.26263, 10.6991, 0.0372028)

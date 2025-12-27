@@ -89,8 +89,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8052, 2.90875, 14.3863)
 transform = Transform3D(1, 0, 0, 0, 0.830878, 0.556455, 0, -0.556455, 0.830878, -10.252, 20.0656, 42.264)
 light_energy = 5.0
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-
 [node name="Snow" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 amount = 256

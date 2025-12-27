@@ -1,22 +1,23 @@
 class_name WinterNight extends Scene
 
-@onready var clouds = get_node("../../WeatherConditions/Clouds")
+#@onready var clouds = get_node("../../WeatherConditions/Clouds")
 @onready var light = get_node("../../DirectionalLight3D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_hour = 21
 	end_hour = 4
-	clouds.visible = false
+
 	pass # Replace with function body.
 
-func Enter(weather: String) -> void:
+func Enter(weather: String, _wc: Node) -> void:
 	print("Entering WinterNight")
 	if light:
 		light.light_energy = 0.2
 	match weather:
 		"Clouds", "Cloudy":
-			clouds.visible = true
+			var clouds = _wc.get_node("Clouds")
+			clouds.visible = weather == "Clouds"
 		"Clear":
 			pass # everything stays hidden
 	# Set background, particle effects, etc.

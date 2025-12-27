@@ -1,6 +1,7 @@
 class_name Scene extends Node
 var start_hour: int = 0
 var end_hour: int = 0
+
 #static var idler: Idler
 #@onready var label = $"../../UI/MessageLabel"
 #@onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
@@ -10,7 +11,7 @@ var end_hour: int = 0
 func _ready() -> void:
 	pass # Replace with function body.
 
-func Enter(_weather: String) -> void:
+func Enter(_weather: String, _wc: Node) -> void:
 	pass
 
 func Exit() -> void:

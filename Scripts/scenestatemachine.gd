@@ -6,6 +6,9 @@ var prev_scene: Scene = null
 var last_hour: int = -1
 var current_weather: String = "Clear" # default
 
+@export var weather_conditions_path: NodePath
+@onready var weather_conditions = get_node(weather_conditions_path)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -24,6 +27,9 @@ func _ready() -> void:
 
 	_update_scene_by_time_and_weather()
 	process_mode = Node.PROCESS_MODE_INHERIT
+	
+	#print("WeatherConditions path:", weather_conditions_path)
+	#print("WeatherConditions node:", weather_conditions)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,7 +58,11 @@ func _check_hour_change() -> void:
 # ----- Weather Update -----
 func _on_weather_updated(weather: String) -> void:
 	current_weather = weather
-	_update_scene_by_time_and_weather()
+	print("Weather updated:", current_weather)
+
+	# Option 2: Let the current scene handle the new weather directly
+	if curr_scene:
+		curr_scene.Enter(current_weather, weather_conditions)
 
 # ----- Decide scene based on hour + weather -----
 func _update_scene_by_time_and_weather() -> void:
@@ -71,7 +81,7 @@ func _update_scene_by_time_and_weather() -> void:
 
 	# Try to match weather within hour-matched scenes
 	for s in hour_matched_scenes:
-		if s.name.to_lower().find(current_weather.to_lower()) != -1:
+		if current_weather in s.allowed_weathers:
 			ChangeScene(s)
 			return
 	
@@ -88,9 +98,7 @@ func ChangeScene(new_scene: Scene) -> void:
 	
 	prev_scene = curr_scene
 	curr_scene = new_scene
-	curr_scene.Enter(current_weather)
-	
-	
+	curr_scene.Enter(current_weather, weather_conditions)
 	
 	print("Switched to scene: ", curr_scene.name)
 	

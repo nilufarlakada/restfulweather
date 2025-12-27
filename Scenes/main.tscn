@@ -44,6 +44,7 @@ script = null
 
 [node name="SceneStateMachine" type="Node" parent="."]
 script = ExtResource("5_6bp64")
+weather_conditions_path = NodePath("../WeatherConditions")
 metadata/_custom_type_script = "uid://0w7daxqx75iv"
 
 [node name="WinterDay" type="Node" parent="SceneStateMachine"]

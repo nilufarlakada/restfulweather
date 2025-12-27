@@ -1,6 +1,6 @@
-class_name WinterDay extends Scene
+class_name Winter extends Scene
 
-#@onready var clouds = get_node("/root/Main/WeatherConditions/Clouds")
+var clouds: Node3D
 @onready var light = get_node("../../DirectionalLight3D")
 var allowed_weathers: Array = ["Clouds", "Snow", "Rain", "Clear"]
 
@@ -16,24 +16,26 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func Enter(weather: String, _wc: Node) -> void:
-	print("Entering WinterDay")
+	print("Entering Winter")
 	
 	if light:
 		light.light_energy = 5
+		
+	if clouds == null:
+		clouds =  _wc.get_node("Clouds")
 
-	match weather:
-		"Clouds", "Cloudy":
-			var clouds = _wc.get_node("Clouds")
-			clouds.visible = weather == "Clouds"
-		"Clear":
-			pass # everything stays hidden
+	clouds.visible = weather == "Clouds"
 
 	# Set background, particle effects, etc.
 
 func Exit() -> void:
-	print("Exiting WinterDay")
+	print("Exiting Winter")
 
 func Process(_delta: float) -> Scene:
+	# Map hour 0-23 → light energy 0.1 (night) to 5 (day)
+	var hour = Time.get_datetime_dict_from_system().hour
+	var target_energy = lerp(0.1, 5.0, clamp(float(hour - 6) / 12.0, 0.0, 1.0))
+	light.light_energy = lerp(light.light_energy, target_energy, 0.02)
 	return null
 
 func Physics(_delta: float) -> Scene:

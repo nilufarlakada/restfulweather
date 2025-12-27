@@ -143,8 +143,6 @@ metadata/_custom_type_script = "uid://0w7daxqx75iv"
 
 [node name="MorningState" type="Node" parent="StateMachine"]
 script = SubResource("GDScript_22vc3")
-metadata/_custom_type_script = "uid://vd18rpgl81ks"
 
 [node name="EveningState" type="Node" parent="StateMachine"]
 script = SubResource("GDScript_prfkh")
-metadata/_custom_type_script = "uid://c7emub3h2veov"

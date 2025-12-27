@@ -10,7 +10,7 @@ var end_hour: int = 0
 func _ready() -> void:
 	pass # Replace with function body.
 
-func Enter() -> void:
+func Enter(_weather: String) -> void:
 	pass
 
 func Exit() -> void:

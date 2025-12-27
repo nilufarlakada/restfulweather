@@ -88,6 +88,9 @@ func ChangeScene(new_scene: Scene) -> void:
 	
 	prev_scene = curr_scene
 	curr_scene = new_scene
-	curr_scene.Enter()
+	curr_scene.Enter(current_weather)
+	
+	
+	
 	print("Switched to scene: ", curr_scene.name)
 	

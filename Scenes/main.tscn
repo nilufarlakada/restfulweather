@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://by6qjyvv6ndcy"]
+[gd_scene load_steps=10 format=3 uid="uid://by6qjyvv6ndcy"]
 
 [ext_resource type="Script" uid="uid://e6hp1pc1vlye" path="res://Scripts/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bulvsf0idnnoj" path="res://ass/snowground.glb" id="2_8gbba"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://0w7daxqx75iv" path="res://Scripts/scenestatemachine.gd" id="5_6bp64"]
 [ext_resource type="Script" uid="uid://ca3gc4nqn4h6e" path="res://Scenes/winter_day.gd" id="6_344ge"]
 [ext_resource type="Script" uid="uid://cmchly3lqqnyn" path="res://Scenes/winter_night.gd" id="7_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://cgrs2eermwraq" path="res://Scenes/snowing.tscn" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://b75gkabc5dced" path="res://Scenes/cloudy.tscn" id="8_ynf5e"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_bo1nx")
@@ -29,6 +31,16 @@ light_energy = 5.0
 [node name="WM" type="Node3D" parent="."]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="WM"]
+
+[node name="WeatherConditions" type="Node3D" parent="."]
+
+[node name="Clouds" parent="WeatherConditions" instance=ExtResource("8_ynf5e")]
+visible = false
+script = null
+
+[node name="Snowing" parent="WeatherConditions" instance=ExtResource("8_344ge")]
+visible = false
+script = null
 
 [node name="SceneStateMachine" type="Node" parent="."]
 script = ExtResource("5_6bp64")

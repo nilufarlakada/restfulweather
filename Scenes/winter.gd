@@ -6,8 +6,8 @@ var allowed_weathers: Array = ["Clouds", "Snow", "Rain", "Clear"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	start_hour = 5
-	end_hour = 20
+	start_hour = 0
+	end_hour = 23
 	
 	# Reset everything
 	#clouds.visible = false

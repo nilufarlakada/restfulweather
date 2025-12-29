@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://by6qjyvv6ndcy"]
+[gd_scene load_steps=10 format=3 uid="uid://by6qjyvv6ndcy"]
 
 [ext_resource type="Script" uid="uid://e6hp1pc1vlye" path="res://Scripts/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bulvsf0idnnoj" path="res://ass/snowground.glb" id="2_8gbba"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c4b4xlktkr66k" path="res://Scripts/camer_root.gd" id="2_kry3j"]
 [ext_resource type="Script" uid="uid://0w7daxqx75iv" path="res://Scripts/scenestatemachine.gd" id="5_6bp64"]
 [ext_resource type="Script" uid="uid://ca3gc4nqn4h6e" path="res://Scenes/winter.gd" id="6_344ge"]
+[ext_resource type="PackedScene" uid="uid://u6khwbq13k2v" path="res://Scenes/raining.tscn" id="7_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://cgrs2eermwraq" path="res://Scenes/snowing.tscn" id="8_344ge"]
 [ext_resource type="PackedScene" uid="uid://b75gkabc5dced" path="res://Scenes/cloudy.tscn" id="8_ynf5e"]
 
@@ -37,7 +38,11 @@ light_energy = 5.0
 visible = false
 script = null
 
-[node name="Snowing" parent="WeatherConditions" instance=ExtResource("8_344ge")]
+[node name="Snow" parent="WeatherConditions" instance=ExtResource("8_344ge")]
+visible = false
+script = null
+
+[node name="Rain" parent="WeatherConditions" instance=ExtResource("7_ynf5e")]
 visible = false
 script = null
 

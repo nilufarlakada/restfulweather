@@ -1,7 +1,9 @@
 class_name Winter extends Scene
 
+@onready var light = get_node("../../DirectionalLight3D") # DirectionalLight
 var clouds: Node3D
-@onready var light = get_node("../../DirectionalLight3D")
+var snow: Node3D
+var rain: Node3D
 var allowed_weathers: Array = ["Clouds", "Snow", "Rain", "Clear"]
 
 # Called when the node enters the scene tree for the first time.
@@ -9,27 +11,32 @@ func _ready() -> void:
 	start_hour = 0
 	end_hour = 23
 	
-	# Reset everything
-	#clouds.visible = false
-	#snow.visible = false
-	#rain.visible = false
 	pass # Replace with function body.
 
-func Enter(weather: String, _wc: Node) -> void:
-	print("Entering Winter")
-	
-	if light:
-		light.light_energy = 5
-		
+# --- Called when scene enters ---
+func Enter(weather: String, weather_conditions: Node) -> void:
+	# Cache weather nodes once
 	if clouds == null:
-		clouds =  _wc.get_node("Clouds")
-
+		clouds = weather_conditions.get_node("Clouds") as Node3D
+	if snow == null:
+		snow = weather_conditions.get_node("Snow") as Node3D
+	if rain == null:
+		rain = weather_conditions.get_node("Rain") as Node3D
+	
+	# Show the current weather
 	clouds.visible = weather == "Clouds"
+	snow.visible = weather == "Snow"
+	rain.visible = weather == "Rain"
 
-	# Set background, particle effects, etc.
-
+# --- Called when scene exits ---
 func Exit() -> void:
-	print("Exiting Winter")
+	# Optionally hide all effects
+	if clouds:
+		clouds.visible = false
+	if snow:
+		snow.visible = false
+	if rain:
+		rain.visible = false
 
 func Process(_delta: float) -> Scene:
 	# Map hour 0-23 → light energy 0.1 (night) to 5 (day)

@@ -1,0 +1,98 @@
+[gd_scene load_steps=16 format=3 uid="uid://u6khwbq13k2v"]
+
+[ext_resource type="Script" uid="uid://e6hp1pc1vlye" path="res://Scripts/main.gd" id="1_vx4sm"]
+[ext_resource type="Script" uid="uid://c4b4xlktkr66k" path="res://Scripts/camer_root.gd" id="2_wgomy"]
+[ext_resource type="Script" uid="uid://cbwbu6lsmt1yc" path="res://Scripts/camera_pivot.gd" id="3_uap3o"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wjvmw"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_q3g74"]
+sky_material = SubResource("ProceduralSkyMaterial_wjvmw")
+
+[sub_resource type="Environment" id="Environment_jkhue"]
+background_mode = 2
+sky = SubResource("Sky_q3g74")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_sun_scatter = 0.5
+fog_density = 0.02
+fog_sky_affect = 0.7
+
+[sub_resource type="Gradient" id="Gradient_wjvmw"]
+offsets = PackedFloat32Array(0, 0.554545, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q3g74"]
+gradient = SubResource("Gradient_wjvmw")
+
+[sub_resource type="Curve" id="Curve_jkhue"]
+_data = [Vector2(0, 0), 0.0, 4.42055, 0, 0, Vector2(0.183824, 0.988764), 0.0, 0.0, 0, 0, Vector2(1, 0.460674), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_he2xy"]
+curve = SubResource("Curve_jkhue")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_he2xy"]
+emission_shape = 3
+emission_box_extents = Vector3(11, 2, 11)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, -5.5, 0)
+radial_accel_min = -8.0
+radial_accel_max = 8.0
+damping_max = 4.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_he2xy")
+color = Color(0.873298, 0.873298, 0.873298, 1)
+color_ramp = SubResource("GradientTexture1D_q3g74")
+
+[sub_resource type="Gradient" id="Gradient_j1bsm"]
+offsets = PackedFloat32Array(0.333333, 0.710526)
+colors = PackedColorArray(0, 1, 1, 1, 0.309804, 0.309804, 0.309804, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w0443"]
+gradient = SubResource("Gradient_j1bsm")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcqyd"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_w0443")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_0ivwe"]
+material = SubResource("StandardMaterial3D_lcqyd")
+
+[node name="Raining" type="Node3D"]
+script = ExtResource("1_vx4sm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jkhue")
+
+[node name="CameraRoot" type="Node3D" parent="."]
+script = ExtResource("2_wgomy")
+
+[node name="CameraPivot" type="Node3D" parent="CameraRoot"]
+script = ExtResource("3_uap3o")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRoot/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8052, 2.90875, 14.3863)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.830878, 0.556455, 0, -0.556455, 0.830878, -10.252, 20.0656, 42.264)
+light_energy = 5.0
+
+[node name="Rain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+amount = 256
+lifetime = 3.5
+visibility_aabb = AABB(-52.5433, -58.2178, -49.5878, 93.1639, 61.199, 87.2086)
+process_material = SubResource("ParticleProcessMaterial_he2xy")
+draw_pass_1 = SubResource("QuadMesh_0ivwe")
